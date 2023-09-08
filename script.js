@@ -46,9 +46,28 @@ function getQuestions() {
 
   answerChoices.textContent = "";
 
+var answerList = document.createElement('ul');
+
+  getQuestion.choices.forEach(function (choice) {
+    var listItem = document.createElement("li");
+    listItem.textContent = choice;
+    listItem.addEventListener("click", function () {
+      checkAnswer(choice, getQuestion.answer);
+    })
+    answerList.appendChild(listItem);
+  })
+  answerChoices.appendChild(answerList);
+
+  function checkAnswer() {
+    questionNumber++;
+    if (questionNumber < questions.length) {
+      getQuestions();
+    }
+  }
+};
 
 
-}
+
 
 function startQuiz() {
   startBtn.style.display = 'none';
