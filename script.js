@@ -34,11 +34,14 @@ var questions = [
   },
 ];
 var score = 0;
+var timer = 60
 var questionNumber = 0;
 var startBtn = document.querySelector('.start-button');
 var questionText = document.querySelector('.question-text');
 var answerChoices = document.querySelector('.answers');
-
+var answerResult = document.querySelector('.answer-result');
+var correctAnswerDisplay = 'CORRECT!';
+var wrongAnswerDisplay = 'WRONG!';
 
 function getQuestions() {
   var getQuestion = questions[questionNumber];
@@ -58,10 +61,16 @@ var answerList = document.createElement('ul');
   })
   answerChoices.appendChild(answerList);
 
-  function checkAnswer() {
+  function checkAnswer(choices, correctChoice) {
     questionNumber++;
     if (questionNumber < questions.length) {
       getQuestions();
+    }
+    if (choices === correctChoice) {
+      answerResult.textContent = correctAnswerDisplay;
+    } else {
+      answerResult.textContent = wrongAnswerDisplay;
+      timer = timer - 10;
     }
   }
 };
