@@ -44,48 +44,54 @@ var answerResult = document.querySelector('.answer-result');
 var correctAnswerDisplay = 'CORRECT!';
 var wrongAnswerDisplay = 'WRONG!';
 
-function getQuestions() {
 
+
+function getQuestions() {
   var getQuestion = questions[questionNumber];
   questionText.textContent = getQuestion.title;
-
   answerChoices.textContent = "";
-
   var answerList = document.createElement('ul');
 
   getQuestion.choices.forEach(function (choice) {
-
     var listItem = document.createElement("li");
-
     listItem.textContent = choice;
-
     listItem.addEventListener("click", function () {
       checkAnswer(choice, getQuestion.answer);
     })
     answerList.appendChild(listItem);
   })
   answerChoices.appendChild(answerList);
+  
+};
 
-
-  function checkAnswer(choices, correctChoice) {
-    questionNumber++;
-
-    if (questionNumber < questions.length) {
-      getQuestions();
-    }
-
-    if (choices === correctChoice) {
-      answerResult.textContent = correctAnswerDisplay;
-    } else {
-      answerResult.textContent = wrongAnswerDisplay;
-      timeLeft = timeLeft - 10;
-    }
-
+function checkAnswer(choices, correctChoice) {
+  questionNumber++;
+  if (questionNumber < questions.length) {
+    getQuestions();
+  }
+  if (choices === correctChoice) {
+    answerResult.textContent = correctAnswerDisplay;
+  } else {
+    answerResult.textContent = wrongAnswerDisplay;
+    timeLeft = timeLeft - 10;
+  }
+  if (timeLeft === 0|| questionNumber >= 5) {
+    viewHighScoreLeaderBoard();
   }
 };
 
 
-function highScoreLeaderBoard() {
+function viewHighScoreLeaderBoard() {
+  
+  questionText.textContent = 'Please Enter Your Initals to save your HighScore';
+  
+  answerResult.textContent = 'Your Score Was ' + timeLeft;
+  timeLeft = score;
+  answerChoices.textContent = " ";
+  var initialsInputBox = document.createElement('input');
+  initialsInputBox.setAttribute('type', 'text');
+  initialsInputBox.setAttribute('placeholder', 'Enter Initails Here');
+  answerChoices.appendChild(initialsInputBox);
 
 }
 
@@ -98,7 +104,7 @@ function startQuiz() {
   var intervalTimer = setInterval(function () {
     if (timeLeft === -1) {
       clearInterval(intervalTimer);
-      highScoreLeaderBoard();
+
     } else {
       timerEl.textContent = timeLeft;
       timeLeft--;
