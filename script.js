@@ -45,7 +45,6 @@ var correctAnswerDisplay = 'CORRECT!';
 var wrongAnswerDisplay = 'WRONG!';
 
 
-
 function getQuestions() {
   var getQuestion = questions[questionNumber];
   questionText.textContent = getQuestion.title;
@@ -61,7 +60,6 @@ function getQuestions() {
     answerList.appendChild(listItem);
   })
   answerChoices.appendChild(answerList);
-  
 };
 
 function checkAnswer(choices, correctChoice) {
@@ -75,16 +73,14 @@ function checkAnswer(choices, correctChoice) {
     answerResult.textContent = wrongAnswerDisplay;
     timeLeft = timeLeft - 10;
   }
-  if (timeLeft === 0|| questionNumber >= 5) {
+  if (questionNumber >= 5) {
     viewHighScoreLeaderBoard();
   }
 };
 
 
 function viewHighScoreLeaderBoard() {
-  
   questionText.textContent = 'Please Enter Your Initals to save your HighScore';
-  
   answerResult.textContent = 'Your Score Was ' + timeLeft;
   timeLeft = score;
   answerChoices.textContent = " ";
@@ -92,26 +88,23 @@ function viewHighScoreLeaderBoard() {
   initialsInputBox.setAttribute('type', 'text');
   initialsInputBox.setAttribute('placeholder', 'Enter Initails Here');
   answerChoices.appendChild(initialsInputBox);
-
 }
 
-
+function counter() {
+  var  intervalTimer = setInterval(function () {
+  timerEl.textContent = timeLeft;
+    timeLeft--;
+  if (timeLeft === -1) {
+    // viewHighScoreLeaderBoard();
+    clearInterval(intervalTimer);
+  }
+}, 1000)
+}
 
 function startQuiz() {
   startBtn.style.display = 'none';
   getQuestions();
-
-  var intervalTimer = setInterval(function () {
-    if (timeLeft === -1) {
-      clearInterval(intervalTimer);
-
-    } else {
-      timerEl.textContent = timeLeft;
-      timeLeft--;
-    }
-
-
-  }, 1000)
+ counter();
 }
 
 
