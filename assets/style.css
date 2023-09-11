@@ -1,12 +1,102 @@
+body {
+    background: linear-gradient(#222, #222);
+}
+
 header {
     display: flex;
     justify-content: space-between;
 }
 
+h1 {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 40px;
+    color: ghostwhite;
+}
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    color: ghostwhite;
+
+}
+
+.question-text {
+    background: linear-gradient(#222, #222),
+        linear-gradient(to right, rgb(255, 115, 0), rgb(0, 77, 128));
+    background-origin: padding-box, border-box;
+    background-repeat: no-repeat;
+    border: 5px solid transparent;
+
+
+
+}
+div {
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+}
 section {
     text-align: center;
 }
 
-.text {
-    width: 300px;
+ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 7px;
+    flex-wrap: wrap;
+}
+
+.multiple-choice-answers {
+    width: 20%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, rgb(255, 145, 0) 60%, cyan);
+    border-radius: 30px;
+    height: 60px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+    font-size: 13px;
+    
+}
+
+.multiple-choice-answers:hover {
+    filter: contrast(70%);
+}
+
+.start-button {
+    background: linear-gradient(135deg, rgb(255, 136, 0) 60%, cyan);
+    height: 40px;
+    width: 15%;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+    font-size: 20px;
+}
+
+.start-button:hover {
+    filter: contrast(70%);
+    
+}
+
+.answer-result {
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+    margin-left: 39px;
+    font-size: 35px;
+}
+
+.time {
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+}
+
+input {
+    background: linear-gradient(135deg, rgb(255, 136, 0) 60%, cyan);
+    
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+    font-size: 20px;
 }

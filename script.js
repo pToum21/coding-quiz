@@ -43,6 +43,9 @@ var answerChoices = document.querySelector('.answers');
 var answerResult = document.querySelector('.answer-result');
 var correctAnswerDisplay = 'CORRECT!';
 var wrongAnswerDisplay = 'WRONG!';
+var initialsInputBox = document.createElement('input');
+var InitalSubmitBtn = document.createElement('input');
+
 
 
 function getQuestions() {
@@ -52,7 +55,8 @@ function getQuestions() {
   var answerList = document.createElement('ul');
 
   getQuestion.choices.forEach(function (choice) {
-    var listItem = document.createElement("li");
+    var listItem = document.createElement("button");
+    listItem.setAttribute('class', 'multiple-choice-answers')
     listItem.textContent = choice;
     listItem.addEventListener("click", function () {
       checkAnswer(choice, getQuestion.answer);
@@ -73,41 +77,49 @@ function checkAnswer(choices, correctChoice) {
     answerResult.textContent = wrongAnswerDisplay;
     timeLeft = timeLeft - 10;
   }
-  if (questionNumber >= 5) {
-    viewHighScoreLeaderBoard();
-  }
 };
 
 
 function viewHighScoreLeaderBoard() {
   questionText.textContent = 'Please Enter Your Initals to save your HighScore';
-  answerResult.textContent = 'Your Score Was ' + timeLeft;
-  timeLeft = score;
+  var newTime = timeLeft + 1
+  answerResult.textContent = 'Your Score Was ' + newTime;
+  score = timeLeft;
   answerChoices.textContent = " ";
-  var initialsInputBox = document.createElement('input');
+  
   initialsInputBox.setAttribute('type', 'text');
   initialsInputBox.setAttribute('placeholder', 'Enter Initails Here');
   answerChoices.appendChild(initialsInputBox);
+  
+  InitalSubmitBtn.setAttribute('type', 'submit');
+  answerChoices.appendChild(InitalSubmitBtn);
+  InitalSubmitBtn.addEventListener('click', submitScore)
 }
 
 function counter() {
-  var  intervalTimer = setInterval(function () {
-  timerEl.textContent = timeLeft;
+  var intervalTimer = setInterval(function () {
+    timerEl.textContent = timeLeft;
     timeLeft--;
-  if (timeLeft === -1) {
-    // viewHighScoreLeaderBoard();
-    clearInterval(intervalTimer);
-  }
-}, 1000)
+
+    if (timeLeft === 0 || questionNumber >= 5) {
+      clearInterval(intervalTimer);
+      viewHighScoreLeaderBoard();
+    }
+  }, 1000)
 }
 
 function startQuiz() {
   startBtn.style.display = 'none';
   getQuestions();
- counter();
+  counter();
 }
 
-
+function submitScore() {
+questionText.textContent = 'High Score LeaderBoard!';
+initialsInputBox.textContent = score;
+InitalSubmitBtn.remove();
+initialsInputBox.remove();
+}
 
 
 
