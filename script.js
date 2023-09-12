@@ -48,6 +48,8 @@ var InitalSubmitBtn = document.createElement('input');
 
 
 
+
+
 function getQuestions() {
   var getQuestion = questions[questionNumber];
   questionText.textContent = getQuestion.title;
@@ -86,14 +88,15 @@ function viewHighScoreLeaderBoard() {
   answerResult.textContent = 'Your Score Was ' + newTime;
   score = timeLeft;
   answerChoices.textContent = " ";
-  
+
   initialsInputBox.setAttribute('type', 'text');
   initialsInputBox.setAttribute('placeholder', 'Enter Initails Here');
   answerChoices.appendChild(initialsInputBox);
-  
+
   InitalSubmitBtn.setAttribute('type', 'submit');
   answerChoices.appendChild(InitalSubmitBtn);
   InitalSubmitBtn.addEventListener('click', submitScore)
+  
 }
 
 function counter() {
@@ -115,12 +118,24 @@ function startQuiz() {
 }
 
 function submitScore() {
-questionText.textContent = 'High Score LeaderBoard!';
-initialsInputBox.textContent = score;
-InitalSubmitBtn.remove();
-initialsInputBox.remove();
-}
+  questionText.textContent = 'High Score LeaderBoard!';
+  initialsInputBox.textContent = score;
 
+let showUserName = JSON.parse(localStorage.getItem('intials')) || [];
+console.log()
+showUserName.push(initialsInputBox.value + '_' + score);
+localStorage.setItem('intials', JSON.stringify());
+
+
+
+
+  // var  userInput = document.querySelector('input').value;
+  // localStorage.setItem('intials', userInput);
+  // answerResult.textContent = lastIntials;
+  InitalSubmitBtn.remove();
+  initialsInputBox.remove();
+
+}
 
 
 startBtn.addEventListener('click', startQuiz);
