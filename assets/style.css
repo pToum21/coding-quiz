@@ -126,3 +126,18 @@ li {
     color: ghostwhite;
     font-size: 20px;
 }
+
+.play-again, .clear-storage{
+    width: 20%;
+    margin-top: 10px;
+    background: linear-gradient(135deg, rgb(255, 145, 0) 60%, cyan);
+    height: 60px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    color: ghostwhite;
+    font-size: 13px;
+}
+
+.hide {
+    display: none;
+}

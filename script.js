@@ -48,7 +48,9 @@ var wrongAnswerDisplay = 'WRONG!';
 var initialsInputBox = document.createElement('input');
 var InitalSubmitBtn = document.createElement('input');
 var HighScorePageResults = document.querySelector('#high-score-page-results');
-var HighScoresLink = document.querySelector('.view-high-scores-link')
+var HighScoresLink = document.querySelector('.view-high-scores-link');
+var refreshBtn = document.querySelector('.play-again');
+var clearStorageBtn = document.querySelector('.clear-storage');
 
 
 
@@ -126,22 +128,31 @@ function startQuiz() {
 }
 
 // function that saves local storage and creates the actual names and scores on the high score leader board
+
 function submitScore() {
   questionText.textContent = 'High Score LeaderBoard!';
-  initialsInputBox.textContent = score;
+  
   
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
-
-  showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
-  localStorage.setItem('intials', JSON.stringify(showHighScore));
-  for (let i = 0; i < showHighScore.length; i++) {
-    var scoreListEl = document.createElement('li');
-    scoreListEl.textContent = showHighScore[i];
-    HighScorePageResults.appendChild(scoreListEl);   
-  }
+  if (initialsInputBox.value === null) {
+    console.log('ajhsdkahsd')
+    return;
+  } else {
+    initialsInputBox.textContent = score;
+    showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
+    localStorage.setItem('intials', JSON.stringify(showHighScore));
+    for (let i = 0; i < showHighScore.length; i++) {
+      var scoreListEl = document.createElement('li');
+      scoreListEl.textContent = showHighScore[i];
+      HighScorePageResults.appendChild(scoreListEl);   
+    }
   
-  InitalSubmitBtn.remove();
-  initialsInputBox.remove();
+  }
+  InitalSubmitBtn.classList.add('hide');
+  initialsInputBox.classList.add('hide');
+  refreshBtn.classList.remove('hide');
+  clearStorageBtn.classList.remove('hide');
+  
 }
 
 // function that links you to the highscores page from the starter screen
@@ -151,6 +162,17 @@ answerChoices.remove();
 submitScore();
 HighScoresLink.remove(); 
 }
+
+// function that allows the user to play again
+function refreshPage() {
+  window.location.reload();
+}
+
+function clearScore() {
+  localStorage.removeItem('intials');
+  HighScorePageResults.classList.add('hide');
+}
+
 
 // start quiz start btn
 startBtn.addEventListener('click', startQuiz);
