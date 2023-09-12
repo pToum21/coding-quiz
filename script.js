@@ -126,7 +126,7 @@ let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
 showHighScore.push(initialsInputBox.value + ' ' + score);
 localStorage.setItem('intials', JSON.stringify(showHighScore));
 
-answerResult.textContent = showUserName;
+answerResult.textContent = showHighScore;
 
 
 
