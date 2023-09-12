@@ -45,6 +45,7 @@ var correctAnswerDisplay = 'CORRECT!';
 var wrongAnswerDisplay = 'WRONG!';
 var initialsInputBox = document.createElement('input');
 var InitalSubmitBtn = document.createElement('input');
+var HighScorePageResults = document.querySelector('.high-score-page-results');
 
 
 
@@ -96,7 +97,7 @@ function viewHighScoreLeaderBoard() {
   InitalSubmitBtn.setAttribute('type', 'submit');
   answerChoices.appendChild(InitalSubmitBtn);
   InitalSubmitBtn.addEventListener('click', submitScore)
-  
+
 }
 
 function counter() {
@@ -121,18 +122,20 @@ function submitScore() {
   questionText.textContent = 'High Score LeaderBoard!';
   initialsInputBox.textContent = score;
 
-let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
+  let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
 
-showHighScore.push(initialsInputBox.value + ' ' + score);
-localStorage.setItem('intials', JSON.stringify(showHighScore));
+  showHighScore.push(initialsInputBox.value + ' ' + score);
+  localStorage.setItem('intials', JSON.stringify(showHighScore));
+  for (let i = 0; i < showHighScore.length; i++) {
+    var scoreListEl = document.createElement('li');
+    console.log(scoreListEl);
+  }
 
-answerResult.textContent = showHighScore;
+  HighScorePageResults.appendChild(scoreListEl);
+  scoreListEl.textContent = showHighScore;
 
+  // answerResult.textContent = showHighScore;
 
-
-  // var  userInput = document.querySelector('input').value;
-  // localStorage.setItem('intials', userInput);
-  // answerResult.textContent = lastIntials;
   InitalSubmitBtn.remove();
   initialsInputBox.remove();
 
