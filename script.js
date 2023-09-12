@@ -45,7 +45,7 @@ var correctAnswerDisplay = 'CORRECT!';
 var wrongAnswerDisplay = 'WRONG!';
 var initialsInputBox = document.createElement('input');
 var InitalSubmitBtn = document.createElement('input');
-var HighScorePageResults = document.querySelector('.high-score-page-results');
+var HighScorePageResults = document.querySelector('#high-score-page-results');
 
 
 
@@ -76,6 +76,7 @@ function checkAnswer(choices, correctChoice) {
   }
   if (choices === correctChoice) {
     answerResult.textContent = correctAnswerDisplay;
+    score = score + 10;
   } else {
     answerResult.textContent = wrongAnswerDisplay;
     timeLeft = timeLeft - 10;
@@ -86,8 +87,7 @@ function checkAnswer(choices, correctChoice) {
 function viewHighScoreLeaderBoard() {
   questionText.textContent = 'Please Enter Your Initals to save your HighScore';
   var newTime = timeLeft + 1
-  answerResult.textContent = 'Your Score Was ' + newTime;
-  score = timeLeft;
+  answerResult.textContent = 'Your Score Was ' + score;
   answerChoices.textContent = " ";
 
   initialsInputBox.setAttribute('type', 'text');
@@ -97,11 +97,13 @@ function viewHighScoreLeaderBoard() {
   InitalSubmitBtn.setAttribute('type', 'submit');
   answerChoices.appendChild(InitalSubmitBtn);
   InitalSubmitBtn.addEventListener('click', submitScore)
+  timerEl.textContent = 0;
 
 }
 
 function counter() {
   var intervalTimer = setInterval(function () {
+    
     timerEl.textContent = timeLeft;
     timeLeft--;
 
@@ -124,15 +126,16 @@ function submitScore() {
 
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
 
-  showHighScore.push(initialsInputBox.value + ' ' + score);
+  showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
   localStorage.setItem('intials', JSON.stringify(showHighScore));
   for (let i = 0; i < showHighScore.length; i++) {
     var scoreListEl = document.createElement('li');
-    console.log(scoreListEl);
+    scoreListEl.textContent = showHighScore[i];
+    HighScorePageResults.appendChild(scoreListEl);
+    
+    
   }
-
-  HighScorePageResults.appendChild(scoreListEl);
-  scoreListEl.textContent = showHighScore;
+  
 
   // answerResult.textContent = showHighScore;
 
