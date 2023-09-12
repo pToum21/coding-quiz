@@ -1,4 +1,4 @@
-
+// object that stores the content for all the questions, choices, and answers
 var questions = [
   {
     title: 'Commonly used data types DO NOT include:',
@@ -33,6 +33,8 @@ var questions = [
     answer: 'console.log',
   },
 ];
+
+// variables in the global scope - can be used anywhere
 var score = 0;
 var timerEl = document.querySelector('.time');
 var timeLeft = 60;
@@ -46,11 +48,12 @@ var wrongAnswerDisplay = 'WRONG!';
 var initialsInputBox = document.createElement('input');
 var InitalSubmitBtn = document.createElement('input');
 var HighScorePageResults = document.querySelector('#high-score-page-results');
+var HighScoresLink = document.querySelector('.view-high-scores-link')
 
 
 
 
-
+// function that displays the questions and multiple choices
 function getQuestions() {
   var getQuestion = questions[questionNumber];
   questionText.textContent = getQuestion.title;
@@ -69,6 +72,7 @@ function getQuestions() {
   answerChoices.appendChild(answerList);
 };
 
+// function that checks to make sure if the answer is correct or wrong
 function checkAnswer(choices, correctChoice) {
   questionNumber++;
   if (questionNumber < questions.length) {
@@ -83,7 +87,7 @@ function checkAnswer(choices, correctChoice) {
   }
 };
 
-
+// function that displays the highscore leaderboard
 function viewHighScoreLeaderBoard() {
   questionText.textContent = 'Please Enter Your Initals to save your HighScore';
   var newTime = timeLeft + 1
@@ -98,9 +102,9 @@ function viewHighScoreLeaderBoard() {
   answerChoices.appendChild(InitalSubmitBtn);
   InitalSubmitBtn.addEventListener('click', submitScore)
   timerEl.textContent = 0;
-
 }
 
+// function that runs the timer for the quiz
 function counter() {
   var intervalTimer = setInterval(function () {
     
@@ -114,16 +118,18 @@ function counter() {
   }, 1000)
 }
 
+// function that starts the quiz when start button is clicked
 function startQuiz() {
   startBtn.style.display = 'none';
   getQuestions();
   counter();
 }
 
+// function that saves local storage and creates the actual names and scores on the high score leader board
 function submitScore() {
   questionText.textContent = 'High Score LeaderBoard!';
   initialsInputBox.textContent = score;
-
+  
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
 
   showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
@@ -131,18 +137,22 @@ function submitScore() {
   for (let i = 0; i < showHighScore.length; i++) {
     var scoreListEl = document.createElement('li');
     scoreListEl.textContent = showHighScore[i];
-    HighScorePageResults.appendChild(scoreListEl);
-    
-    
+    HighScorePageResults.appendChild(scoreListEl);   
   }
   
-
-  // answerResult.textContent = showHighScore;
-
   InitalSubmitBtn.remove();
   initialsInputBox.remove();
-
 }
 
+// function that links you to the highscores page from the starter screen
+function linkToHighScore(){
+startBtn.remove();
+answerChoices.remove();
+submitScore();
+HighScoresLink.remove(); 
+}
 
+// start quiz start btn
 startBtn.addEventListener('click', startQuiz);
+// view high scores button
+HighScoresLink.addEventListener('click', linkToHighScore);
