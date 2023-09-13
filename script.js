@@ -143,7 +143,7 @@ function submitScore() {
   localStorage.setItem('intials', JSON.stringify(showHighScore));
   displayScores();
 }
-
+// displays highscores
 function displayScores() {
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
   for (let i = 0; i < showHighScore.length; i++) {
@@ -168,7 +168,7 @@ function linkToHighScore() {
 function refreshPage() {
   window.location.reload();
 }
-
+// function that clears local storage
 function clearScore() {
   localStorage.removeItem('intials');
   HighScorePageResults.classList.add('hide');
