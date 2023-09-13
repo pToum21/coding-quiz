@@ -136,7 +136,6 @@ function submitScore() {
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
   if (initialsInputBox.value === '') {
     alert("enter initials");
-    // showHighScore = false;
     questionText.textContent = 'please enter intials';
     
   } 
