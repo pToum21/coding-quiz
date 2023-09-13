@@ -109,7 +109,7 @@ function viewHighScoreLeaderBoard() {
 // function that runs the timer for the quiz
 function counter() {
   var intervalTimer = setInterval(function () {
-    
+
     timerEl.textContent = timeLeft;
     timeLeft--;
 
@@ -131,37 +131,37 @@ function startQuiz() {
 
 function submitScore() {
   questionText.textContent = 'High Score LeaderBoard!';
-  
-  
+
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
   if (initialsInputBox.value === '') {
-    alert("enter initials");
-    questionText.textContent = 'please enter intials';
     
-  } 
-    initialsInputBox.textContent = score;
-    showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
-    localStorage.setItem('intials', JSON.stringify(showHighScore));
-    for (let i = 0; i < showHighScore.length; i++) {
-      var scoreListEl = document.createElement('li');
-      scoreListEl.textContent = showHighScore[i];
-      HighScorePageResults.appendChild(scoreListEl);   
-    }
-  
-  
+    questionText.textContent = 'please enter intials';
+    return;
+  }
+  initialsInputBox.textContent = score;
+  showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
+  localStorage.setItem('intials', JSON.stringify(showHighScore));
+  displayScores();
+}
+
+function displayScores() {
+  let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
+  for (let i = 0; i < showHighScore.length; i++) {
+    var scoreListEl = document.createElement('li');
+    scoreListEl.textContent = showHighScore[i];
+    HighScorePageResults.appendChild(scoreListEl);
+  }
   InitalSubmitBtn.classList.add('hide');
   initialsInputBox.classList.add('hide');
   refreshBtn.classList.remove('hide');
   clearStorageBtn.classList.remove('hide');
-  
 }
-
 // function that links you to the highscores page from the starter screen
-function linkToHighScore(){
-startBtn.remove();
-answerChoices.remove();
-submitScore();
-HighScoresLink.remove(); 
+function linkToHighScore() {
+  startBtn.remove();
+  answerChoices.remove();
+  displayScores();
+  HighScoresLink.remove();
 }
 
 // function that allows the user to play again
