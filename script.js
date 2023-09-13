@@ -134,10 +134,12 @@ function submitScore() {
   
   
   let showHighScore = JSON.parse(localStorage.getItem('intials')) || [];
-  if (initialsInputBox.value === null) {
-    console.log('ajhsdkahsd')
-    return;
-  } else {
+  if (initialsInputBox.value === '') {
+    alert("enter initials");
+    // showHighScore = false;
+    questionText.textContent = 'please enter intials';
+    
+  } 
     initialsInputBox.textContent = score;
     showHighScore.push(initialsInputBox.value + ' - ' + score + ' points');
     localStorage.setItem('intials', JSON.stringify(showHighScore));
@@ -147,7 +149,7 @@ function submitScore() {
       HighScorePageResults.appendChild(scoreListEl);   
     }
   
-  }
+  
   InitalSubmitBtn.classList.add('hide');
   initialsInputBox.classList.add('hide');
   refreshBtn.classList.remove('hide');
