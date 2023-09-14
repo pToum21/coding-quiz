@@ -10,7 +10,7 @@
 - used local storage to save all users previous scores
 
 ## Preview
-![Screen Shot of Quiz Application](<./assets/Coding Quiz - Google Chrome 9_12_2023 8_14_50 PM.png>)
+![Screen Shot of Quiz Application](<./assets/photos/Coding Quiz - Google Chrome 9_12_2023 8_14_50 PM.png>)
 
 ## Deployed Application
 https://ptoum21.github.io/coding-quiz/
